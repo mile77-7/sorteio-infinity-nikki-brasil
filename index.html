@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,28 +8,128 @@
 </head>
 <body>
 
-<main class="container">
-
-    <header class="header">
-        <h1>Galeria dos Participantes</h1>
-        <h3>Sorteio da atualização 2.7</h3>
+    <header class="site-header">
+        <div class="header-logo">
+            <img src="logo.png" alt="Infinity Nikki Brasil">
+        </div>
+        <nav class="header-menu">
+            <a href="#" class="active">Início</a>
+            <a href="#galeria">Galeria</a>
+            <a href="#sobre">Sobre</a>
+        </nav>
+        <div class="header-actions">
+            <a href="#secao-whatsapp" class="btn-sorteio-link">Participar do sorteio</a>
+        </div>
     </header>
 
-    <section id="galeria"></section>
+    <main class="container">
 
-</main>
+        <header class="hero">
+            <h1>Galeria dos Participantes</h1>
+            <p class="badge">Sorteio da atualização 2.7</p>
+            <p class="subtitle">
+                Confira todos os looks incríveis enviados pela comunidade<br>
+                e concorra a prêmios exclusivos de Infinity Nikki!
+            </p>
+        </header>
 
-<footer class="footer">
-    Sorteio Infinity Nikki Brasil
-</footer>
+        <section class="sorteio-info-panel">
+            <div class="info-block premio-block">
+                <div class="block-header">
+                    <span class="block-badge">Premiação</span>
+                    <h2>O Grande Prêmio 🏆</h2>
+                </div>
+                <div class="premio-content">
+                    <div class="premio-main">2 Ganhadores</div>
+                    <p class="premio-desc">
+                        Cada um recebeu o valor equivalente ao <strong>Tesouro de Presentes Mensais</strong> 
+                        <span class="premio-itens">(x300 Estelarita + x90 Diamantes por 30 dias)</span>.
+                    </p>
+                    <div class="premio-pagamento">
+                        <span>✅ Prêmios enviados via PIX em até 48h!</span>
+                    </div>
+                </div>
+            </div>
 
+            <div class="panel-vertical-divider"></div>
 
+            <div class="info-block status-block">
+                <div class="block-header">
+                    <span class="block-badge">Inscrições</span>
+                    <h2>Status do Sorteio 🔒</h2>
+                </div>
+                <div class="status-content">
+                    <div class="status-badge-finalizado">Edição Concluída</div>
+                    <p class="status-text">
+                        O sorteio da <strong>Versão 2.7 ✦ Where Stars Yearn</strong> foi encerrado. Os ganhadores já foram devidamente contatados e todas as premiações foram distribuídas.
+                    </p>
+                    <p class="status-subtext">
+                        Fique atento ao grupo do WhatsApp para não perder a abertura do próximo sorteio!
+                    </p>
+                </div>
+            </div>
+        </section>
 
-<script src="script.js"></script>
+        <div class="gallery-controls">
+            <div class="search-box">
+                <input type="text" placeholder="Buscar participante...">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active">2.7</button>
+                <button class="filter-btn">2.8</button>
+                <button class="filter-btn">2.9</button>
+                <button class="filter-btn">2.10</button>
+            </div>
+            <div class="sort-box">
+                <select>
+                    <option>Mais recentes</option>
+                    <option>Mais votados</option>
+                </select>
+            </div>
+        </div>
 
-<div id="lightbox" class="lightbox">
-    <img id="lightbox-img" src="" alt="">
-</div>
+        <section id="galeria" class="gallery-grid"></section>
 
+        <section id="sobre" class="about-section">
+            <div class="about-container">
+                <div class="about-header">
+                    <span class="about-badge">Conheça o Projeto</span>
+                    <h2>Sobre o Site</h2>
+                </div>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <h3>👑 Quem Organiza?</h3>
+                        <p>Este sorteio é idealizado e realizado com muito carinho pelos <strong>administradores do nosso grupo do WhatsApp</strong>. Nosso objetivo é movimentar a comunidade brasileira de Infinity Nikki, celebrando a criatividade de cada estilista!</p>
+                    </div>
+                    <div class="about-card">
+                        <h3>✨ Como Funciona o Site?</h3>
+                        <p>Este espaço foi criado para ser a nossa <strong>Galeria Oficial de Participantes</strong>. Aqui você pode conferir todos os looks incríveis enviados pela comunidade, buscar pelo nome dos seus amigos e se inspirar com as combinações mais mágicas do jogo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="secao-whatsapp" class="whatsapp-section">
+            <div class="whatsapp-content">
+                <span class="whatsapp-icon">💬</span>
+                <h2>Quer participar do próximo sorteio?</h2>
+                <p>Para garantir a sua vaga e não perder nenhuma novidade da comunidade, entre agora mesmo no nosso grupo exclusivo do WhatsApp!</p>
+                <a href="https://chat.whatsapp.com/DB4TE5dzhCmI0zZe47yk1Z" target="_blank" class="btn-whatsapp">Entrar no Grupo do WhatsApp</a>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer>
+        <p>Sorteio Infinity Nikki Brasil</p>
+        <p class="credits">Desenvolvido por: <a href="https://github.com/miazevedo7" target="_blank">Milene Azevedo</a></p>
+    </footer>
+
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
