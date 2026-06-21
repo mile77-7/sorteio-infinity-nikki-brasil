@@ -99,4 +99,25 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => { lightboxImg.src = ""; }, 300);
         }
     });
+
+    lightbox.addEventListener("touchstart", (e) => {
+        toqueInicialX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    lightbox.addEventListener("touchend", (e) => {
+        toqueFinalX = e.changedTouches[0].screenX;
+        verificarDeslize();
+    }, { passive: true });
+
+    function verificarDeslize() {
+        const limiteDistancia = 50; // Quantos pixels mínimos o dedo deve arrastar para acionar
+        
+        if (toqueInicialX - toqueFinalX > limiteDistancia) {
+            // Arrastou da direita para a esquerda (Próxima Foto)
+            mudarFoto(1);
+        } else if (toqueFinalX - toqueInicialX > limiteDistancia) {
+            // Arrastou da esquerda para a direita (Foto Anterior)
+            mudarFoto(-1);
+        }
+    }
 });
