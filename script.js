@@ -1,5 +1,7 @@
 const URL_API = "https://script.google.com/macros/s/AKfycbxuXsguovjfys72AmnncnvFGyr_Kj0oHArPwpMQKsd-2Ej_LnEniQfKp7z-NRr9c6P2pA/exec";
 let todosParticipantes = [];
+let participantesFiltrados = [];
+let indiceAtual = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
     const galeria = document.getElementById("galeria");
@@ -11,7 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(participantes => {
             todosParticipantes = participantes;
-            renderizarCards(todosParticipantes);
+            participantesFiltrados = [...todosParticipantes];
+            renderizarCards(participantesFiltrados);
         })
         .catch(erro => {
             console.error("Erro ao carregar participantes:", erro);
@@ -24,8 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const cardsHTML = lista.map(pessoa => `
-            <div class="card">
+        const cardsHTML = lista.map((pessoa, index) => `
+            <div class="card" data-index="${index}">
                 <img src="${pessoa.foto}" alt="Look de ${pessoa.nome}">
                 <div class="card-info">
                     <span class="card-author">${pessoa.nome}</span>
@@ -39,22 +42,61 @@ document.addEventListener("DOMContentLoaded", () => {
     inputBusca.addEventListener("input", () => {
         const termoPesquisa = inputBusca.value.toLowerCase().trim();
         
-        const participantesFiltrados = todosParticipantes.filter(pessoa => {
+        participantesFiltrados = todosParticipantes.filter(pessoa => {
             return pessoa.nome && pessoa.nome.toLowerCase().includes(termoPesquisa);
         });
 
         renderizarCards(participantesFiltrados);
     });
 
+    function mudarFoto(direcao) {
+        if (participantesFiltrados.length === 0) return;
+
+        indiceAtual += direcao;
+
+        if (indiceAtual >= participantesFiltrados.length) {
+            indiceAtual = 0;
+        } else if (indiceAtual < 0) {
+            indiceAtual = participantesFiltrados.length - 1;
+        }
+
+        lightboxImg.src = participantesFiltrados[indiceAtual].foto;
+    }
+
     galeria.addEventListener("click", (e) => {
-        if (e.target.tagName === "IMG") {
+        const card = e.target.closest(".card");
+        if (card && e.target.tagName === "IMG") {
+            indiceAtual = parseInt(card.getAttribute("data-index"));
             lightbox.classList.add("active");
             lightboxImg.src = e.target.src;
         }
     });
 
-    lightbox.addEventListener("click", () => {
-        lightbox.classList.remove("active");
-        setTimeout(() => { lightboxImg.src = ""; }, 300);
+    lightbox.addEventListener("click", (e) => {
+        if (e.target.id === "lightbox" || e.target.classList.contains("close-lightbox")) {
+            lightbox.classList.remove("active");
+            setTimeout(() => { lightboxImg.src = ""; }, 300);
+        }
+    });
+
+    document.getElementById("prev-btn").addEventListener("click", (e) => {
+        e.stopPropagation();
+        mudarFoto(-1);
+    });
+
+    document.getElementById("next-btn").addEventListener("click", (e) => {
+        e.stopPropagation();
+        mudarFoto(1);
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if (!lightbox.classList.contains("active")) return;
+        
+        if (e.key === "ArrowRight") mudarFoto(1);
+        if (e.key === "ArrowLeft") mudarFoto(-1);
+        if (e.key === "Escape") {
+            lightbox.classList.remove("active");
+            setTimeout(() => { lightboxImg.src = ""; }, 300);
+        }
     });
 });
